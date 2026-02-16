@@ -4,7 +4,7 @@ A full CI/CD DevOps project implementing a Spring Boot backend and React fronten
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 This project demonstrates:
 
@@ -16,7 +16,7 @@ This project demonstrates:
 
 ---
 
-## 🏗 Architecture
+##  Architecture
 
 Frontend (React) → Backend (Spring Boot REST API) → JSON response
 
@@ -25,7 +25,7 @@ GET /movies
 
 ---
 
-## 🔄 CI/CD Workflows
+##  CI/CD Workflows
 
 ### Backend CI
 - Maven build
@@ -44,12 +44,12 @@ GET /movies
 
 ---
 
-## 🐳 Docker
+##  Docker
 
 Backend Docker image built using Eclipse Temurin JDK 17.
 
 ---
 
-## 🌍 Deployment URLs
+##  Deployment URLs
 
 Backend:

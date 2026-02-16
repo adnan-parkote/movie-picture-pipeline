@@ -1,0 +1,3 @@
+com\example\movies\MoviePicturePipelineApplication.class
+com\example\movies\model\Movie.class
+com\example\movies\controller\MovieController.class

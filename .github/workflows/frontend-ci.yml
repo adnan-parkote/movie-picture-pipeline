@@ -29,7 +29,7 @@ jobs:
       # This is required to run npm and build the React/Vite application
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       
       # Install all project dependencies defined in package.json
       - run: npm install

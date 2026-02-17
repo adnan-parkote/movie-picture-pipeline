@@ -1,14 +1,25 @@
+# Backend Continuous Deployment (CD) Workflow
+# This workflow automatically deploys the backend application to Render
+# when changes are pushed to the main branch in the backend directory
+
 name: Backend CD
 
+# Trigger configuration
 on:
   push:
+    # Only run on the main branch
     branches: [ main ]
+    # Only run when backend files are modified
     paths:
       - "backend/**"
 
 jobs:
   deploy:
+    # Run this job on the latest Ubuntu environment
     runs-on: ubuntu-latest
     steps:
+      # Trigger the Render deployment webhook
+      # This sends a POST request to Render's deployment hook URL
+      # The URL is stored securely as a GitHub secret: RENDER_DEPLOY_HOOK
       - name: Trigger Render Deploy
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}

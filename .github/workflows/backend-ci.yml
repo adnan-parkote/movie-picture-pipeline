@@ -1,27 +1,42 @@
+# Backend Continuous Integration (CI) Workflow
+# This workflow builds and tests the backend application on every push and pull request
+# It ensures code quality before merging to main
+
 name: Backend CI
 
+# Trigger configuration
 on:
+  # Run on every push to any branch when backend files change
   push:
     paths:
       - "backend/**"
+  # Run on every pull request when backend files change
   pull_request:
     paths:
       - "backend/**"
 
 jobs:
   build:
+    # Run this job on the latest Ubuntu environment
     runs-on: ubuntu-latest
+    # Set the default working directory for all run steps
     defaults:
       run:
         working-directory: backend
 
     steps:
+      # Check out the repository code
       - uses: actions/checkout@v3
 
+      # Set up Java Development Kit version 21 (Temurin distribution)
+      # This is required to compile and run the Spring Boot application
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 21
           
+      # Run Maven build and verification
+      # 'clean' removes any previous build artifacts
+      # 'verify' compiles code, runs tests, and performs quality checks
       - run: mvn clean verify

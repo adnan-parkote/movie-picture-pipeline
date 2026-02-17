@@ -1,21 +1,39 @@
+
+# Frontend Continuous Integration (CI) Workflow
+# This workflow builds the frontend application on every push
+# It ensures the build completes successfully before deployment
+
 name: Frontend CI
 
+# Trigger configuration
 on:
+  # Run on every push to any branch when frontend files change
   push:
     paths:
       - "frontend/**"
 
 jobs:
   build:
+    # Run this job on the latest Ubuntu environment
     runs-on: ubuntu-latest
+    # Set the default working directory for all run steps
     defaults:
       run:
         working-directory: frontend
 
     steps:
+      # Check out the repository code
       - uses: actions/checkout@v3
+      
+      # Set up Node.js runtime environment (version 18)
+      # This is required to run npm and build the React/Vite application
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      
+      # Install all project dependencies defined in package.json
       - run: npm install
+      
+      # Build the frontend application
+      # Vite compiles React code and outputs optimized files to the dist/ directory
       - run: npm run build

@@ -1,21 +1,38 @@
+# Frontend Continuous Deployment (CD) Workflow
+# This workflow automatically builds and deploys the frontend application to Netlify
+# when changes are pushed to the main branch in the frontend directory
+
 name: Frontend CD
 
+# Trigger configuration
 on:
   push:
+    # Only run on the main branch
     branches: [ main ]
+    # Only run when frontend files are modified
     paths:
       - "frontend/**"
 
 jobs:
   deploy:
+    # Run this job on the latest Ubuntu environment
     runs-on: ubuntu-latest
     steps:
+      # Check out the repository code
       - uses: actions/checkout@v3
+      
+      # Build and deploy the frontend to Netlify
+      # This action automatically runs npm install and npm run build
       - uses: nwtgck/actions-netlify@v2
         with:
+          # Directory containing the built frontend files (Vite output)
           publish-dir: "./frontend/dist"
+          # Mark this branch as the production environment
           production-branch: main
+          # GitHub token for accessing the repository
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
+          # Netlify authentication token (stored securely in GitHub secrets)
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          # Netlify site ID (stored securely in GitHub secrets)
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
